@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { interval, Observable, of, pipe } from 'rxjs';
+import { interval, of } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 import { Task } from '../models/task.model';
-import { flatMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
