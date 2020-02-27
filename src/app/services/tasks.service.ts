@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { interval, Observable, of, pipe } from 'rxjs';
 import { Task } from '../models/task.model';
+import { flatMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,12 @@ export class TasksService {
   constructor() {}
 
   getTaskListData() {
-    return of({ taskList: this.generateFakeData() } as { taskList: Task[] });
+    return interval(3000)
+      .pipe(
+        flatMap(
+          () => of({ taskList: this.generateFakeData() } as { taskList: Task[] })
+        )
+      );
   }
 
   private generateFakeData(count: number = 10) {
