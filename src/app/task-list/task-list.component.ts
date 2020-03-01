@@ -16,30 +16,38 @@ export class TaskListComponent implements OnInit {
   }
 
   private initialPos: number;
+  private tableLine: any;
 
   onResizeStart(event) {
     console.log(event);
     console.log(event.target.parentElement.offsetWidth);
-    this.initialPos = event.clientX;
+    console.log(event.clientX);
+    this.initialPos = event.offsetX;
+    // this.tableLine = document.createElement('div');
+    // this.renderer.setStyle(this.tableLine, 'height', event.target.closest('table').offsetHeight + 'px');
+    // this.renderer.setStyle(this.tableLine, 'width', '2px');
+    // this.renderer.setStyle(this.tableLine, 'background', 'red');
+    // event.target.parentElement.parentElement.parentElement.appendChild(this.tableLine);
+    // event.dataTransfer.setDragImage(this.tableLine, 0, 0);
   }
 
   onResizeEnd(event) {
-    // console.log(event);
-    // console.log(event.target.parentElement.offsetWidth);
-    // console.log(event.offsetX);
-    // console.log(event.target.parentElement.nextSibling);
-    // const delta = event.offsetX;
-    console.log(event);
-    const delta = event.clientX - this.initialPos;
-    const commonWidth = event.target.parentElement.offsetWidth + event.target.parentElement.nextSibling.offsetWidth - 2;
+    const delta = event.offsetX - this.initialPos;
+    let currentElWidth = event.target.closest('tr').offsetWidth + delta;
+    let nextElWidth = event.target.closest('tr').nextSibling.offsetWidth - delta;
+    const maxAvailableWidth = currentElWidth + nextElWidth - 100;
+
+    if (currentElWidth > maxAvailableWidth) {
+      currentElWidth = maxAvailableWidth;
+      nextElWidth = 100;
+    }
     console.log(delta);
-    console.log(event.target.parentElement.offsetWidth + delta - 2);
-    this.renderer.setStyle(event.target.parentElement, 'width',
-      event.target.parentElement.offsetWidth + delta - 2 + 'px');
-    console.log(commonWidth - event.target.parentElement.offsetWidth);
-    this.renderer.setStyle(event.target.parentElement.nextSibling, 'width',
-      commonWidth - event.target.parentElement.offsetWidth + 'px');
-    // this.renderer.setStyle(event.target.parentElement.nextSibling, 'width',
-    //     //   event.target.parentElement.nextSibling.offsetWidth - delta - 2 + 'px');
+    console.log(currentElWidth);
+    console.log(nextElWidth);
+
+    this.renderer.setStyle(event.target.parentElement, 'width', currentElWidth + 'px');
+    this.renderer.setStyle(event.target.parentElement.nextSibling, 'width', nextElWidth + 'px');
+
+    this.tableLine.remove();
   }
 }
