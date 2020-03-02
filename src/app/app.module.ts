@@ -2,14 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { TaskListComponent } from './task-list/task-list.component';
 import { TaskManagerComponent } from './task-manager/task-manager.component';
+import { TmTableComponent } from './ui/tm-table/tm-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TaskListComponent,
-    TaskManagerComponent
+    TaskManagerComponent,
+    TmTableComponent
   ],
   imports: [
     BrowserModule
