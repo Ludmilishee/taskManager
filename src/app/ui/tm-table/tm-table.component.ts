@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { TableColumnHeader, sortMode } from '../../models/tableData.model';
 
 @Component({
@@ -12,12 +12,14 @@ export class TmTableComponent implements OnInit {
   @Input()
   set data(data) {
     this.tableData = data;
-    this.sortTable(this.sortMode);
+    this.sortTable(this.selectedSortMode);
   }
+
+  selectedSortMode: { value: number, field: string } = { value: 0, field: '' };
+  sortMode = sortMode;
 
   private tableData;
   private initialPos: number;
-  sortMode: { value: number, field: string } = { value: 0, field: '' };
 
   constructor(private renderer: Renderer2) { }
 
@@ -38,13 +40,13 @@ export class TmTableComponent implements OnInit {
       currentElWidth = maxAvailableWidth;
       nextElWidth = 100;
     }
-    this.renderer.setStyle(event.target.parentElement, 'width', currentElWidth + 'px');
-    this.renderer.setStyle(event.target.parentElement.nextSibling, 'width', nextElWidth + 'px');
+    this.renderer.setStyle(event.target.parentElement, 'width', `${currentElWidth}px`);
+    this.renderer.setStyle(event.target.parentElement.nextSibling, 'width', `${nextElWidth}px`);
   }
 
   onFilter(column: TableColumnHeader) {
     this.setNextSortMode(column.field);
-    this.sortTable(this.sortMode);
+    this.sortTable(this.selectedSortMode);
   }
 
   private sortTable({ value, field }) {
@@ -52,13 +54,12 @@ export class TmTableComponent implements OnInit {
       return;
     }
     this.tableData.sort((d1, d2) => {
-      const orderCoeff = value === sortMode.Asc ? 1 : -1;
-
+      const order = value === sortMode.Asc ? 1 : -1;
       if (d1[field] > d2[field]) {
-        return 1 * orderCoeff;
+        return 1 * order;
       }
       if (d1[field] < d2[field]) {
-        return -1 * orderCoeff;
+        return -1 * order;
       }
 
       return 0;
@@ -66,14 +67,10 @@ export class TmTableComponent implements OnInit {
   }
 
   private setNextSortMode(field: string) {
-    if (this.sortMode.field !== field) {
-      this.sortMode.value = 0;
+    if (this.selectedSortMode.field !== field) {
+      this.selectedSortMode.value = 0;
     }
-    const value = this.sortMode.value < sortMode.Desc ? ++this.sortMode.value : sortMode.Asc;
-    this.sortMode = {
-      value,
-      field
-    };
-    console.log(this.sortMode);
+    const value = this.selectedSortMode.value < sortMode.Desc ? ++this.selectedSortMode.value : sortMode.Asc;
+    this.selectedSortMode = { value, field };
   }
 }

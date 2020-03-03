@@ -1,4 +1,5 @@
 <h3>List of tasks</h3>
+Автообновление <app-tm-toggle-button [checked]="true" (changeState)="switchAutoUpdate($event)"></app-tm-toggle-button>
 <app-tm-table [data]="tasksData"
               [columns]="colHeaders"
 ></app-tm-table>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { interval, of } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { of, timer } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { Task } from '../models/task.model';
 
 @Injectable({
@@ -11,9 +11,9 @@ export class TasksService {
   constructor() {}
 
   getTaskListData() {
-    return interval(3000)
+    return timer(0, 1000)
       .pipe(
-        flatMap(
+        switchMap(
           () => of({ taskList: this.generateFakeData() } as { taskList: Task[] })
         )
       );

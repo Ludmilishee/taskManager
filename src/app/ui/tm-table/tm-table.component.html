@@ -1,9 +1,19 @@
 <table>
   <tr>
-    <th *ngFor="let col of columns; last as isLast" style="width: 200px; position: relative">
+    <th *ngFor="let col of columns; last as isLast" (click)="onFilter(col)">
       {{ col.header }}
-      <span (click)="onFilter(col)">A</span>
-      <span *ngIf="!isLast" class="resizer" draggable="true" (dragstart)="onResizeStart($event)" (dragend)="onResizeEnd($event)"></span>
+      <span class="filter"
+            [ngClass]="{
+          'arrow-up': selectedSortMode.field === col.field && selectedSortMode.value === sortMode.Asc,
+          'arrow-down': selectedSortMode.field === col.field && selectedSortMode.value === sortMode.Desc
+        }"
+      ></span>
+      <span *ngIf="!isLast"
+            class="resizer"
+            draggable="true"
+            (dragstart)="onResizeStart($event)"
+            (dragend)="onResizeEnd($event)"
+      ></span>
     </th>
   </tr>
   <tr *ngFor="let val of tableData">
