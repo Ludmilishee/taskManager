@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 import { Task } from '../models/task.model';
 import { TableColumnHeader } from '../models/tableData.model';
@@ -8,14 +8,15 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'tm-task-manager',
   templateUrl: './task-manager.component.html',
-  styleUrls: ['./task-manager.component.css']
+  styleUrls: ['./task-manager.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskManagerComponent implements OnInit, OnDestroy {
 
   private unSubscriber$: ReplaySubject<any> = new ReplaySubject<any>(2);
   private taskDataSubscription;
 
-  constructor(private tasksService: TasksService) { }
+  constructor(private tasksService: TasksService, private cd: ChangeDetectorRef) { }
 
   tasksData: Task[];
   colHeaders: TableColumnHeader[] = [
@@ -34,7 +35,10 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
         .getTaskListData()
         .pipe(takeUntil(this.unSubscriber$))
         .subscribe(
-          (data: { taskList: Task[] }) => { this.tasksData = data.taskList; console.log(this.tasksData); }
+          (data: { taskList: Task[] }) => {
+            this.tasksData = data.taskList;
+            this.cd.detectChanges();
+          }
         );
     } else {
       this.taskDataSubscription.unsubscribe();

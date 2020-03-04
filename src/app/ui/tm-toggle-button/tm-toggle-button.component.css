@@ -1,11 +1,11 @@
 button {
   border: none;
-  padding: 3px 10px;
+  padding: 5px 10px;
   outline: none;
 }
 
 button.on {
-  background: #cee1ff;
+  background: #e5efff;
 }
 
 button.on:before {

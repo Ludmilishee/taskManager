@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'tm-toggle-button',
   templateUrl: './tm-toggle-button.component.html',
-  styleUrls: ['./tm-toggle-button.component.css']
+  styleUrls: ['./tm-toggle-button.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TmToggleButtonComponent implements OnInit {
 

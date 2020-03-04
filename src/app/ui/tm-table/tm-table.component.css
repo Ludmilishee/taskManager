@@ -5,7 +5,7 @@ table {
 }
 
 table, th, td {
-  border: 1px solid #bdbdbd;
+  border: 1px solid #d0d0d0;
 }
 
 th, td {
@@ -17,6 +17,10 @@ th, td {
   box-sizing: border-box;
 }
 
+th {
+  background: #e5efff;
+}
+
 .resizer {
   display: inline-block;
   position: absolute;
@@ -24,7 +28,7 @@ th, td {
   right: 0;
   width: 20px;
   height: 100%;
-  background: #f1f1f1;
+  background: #d2e0f7;
   cursor: col-resize;
 }
 

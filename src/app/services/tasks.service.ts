@@ -31,7 +31,7 @@ export class TasksService {
     for (let i = 0; i < count; i++) {
       data.push({
         name: names[i] || `task${i}.exe`,
-        id: this.getRandomNumber(1, 1000),
+        id: i + 1000,
         state: states[this.getRandomNumber(0, 2)],
         user: users[this.getRandomNumber(0, 1)],
         cpu: this.getRandomNumber(0, 7, 2),

@@ -1,10 +1,11 @@
-import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { TableColumnHeader, sortMode } from '../../models/tableData.model';
 
 @Component({
   selector: 'tm-table',
   templateUrl: './tm-table.component.html',
-  styleUrls: ['./tm-table.component.css']
+  styleUrls: ['./tm-table.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TmTableComponent implements OnInit {
 
@@ -47,9 +48,6 @@ export class TmTableComponent implements OnInit {
       currentElWidth = this.COL_MIN_WIDTH;
       nextElWidth = maxAvailableWidth;
     }
-    console.log('delta: ' + delta);
-    console.log('cur: ' + currentElWidth);
-    console.log('next: ' + nextElWidth);
 
     this.renderer.setStyle(th, 'width', `${currentElWidth}px`);
     this.renderer.setStyle(th.nextSibling, 'width', `${nextElWidth}px`);
