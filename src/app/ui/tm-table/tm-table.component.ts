@@ -7,9 +7,9 @@ import { TableColumnHeader, sortMode } from '../../models/tableData.model';
   styleUrls: ['./tm-table.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TmTableComponent implements OnInit {
+export class TableComponent implements OnInit {
 
-  @Input() columns: TableColumnHeader[];
+  @Input() columns: TableComponent[];
   @Input()
   set data(data) {
     this.tableData = data;
@@ -33,7 +33,7 @@ export class TmTableComponent implements OnInit {
   }
 
   onResizeEnd(event) {
-    const th = event.target.closest('th');
+    const th = event.target.parentElement;
 
     const delta = event.pageX - this.initialPos;
     let currentElWidth = th.offsetWidth + delta;

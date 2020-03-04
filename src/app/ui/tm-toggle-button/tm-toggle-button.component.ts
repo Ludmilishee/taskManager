@@ -6,7 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
   styleUrls: ['./tm-toggle-button.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TmToggleButtonComponent implements OnInit {
+export class ToggleButtonComponent implements OnInit {
 
   @Input() checked: boolean;
 
