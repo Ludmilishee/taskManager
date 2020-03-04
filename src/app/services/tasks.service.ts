@@ -30,7 +30,7 @@ export class TasksService {
 
     for (let i = 0; i < count; i++) {
       data.push({
-        name: names[i] || `task${i}.exe`,
+        name: names[i] || `task${i - names.length}.exe`,
         id: i + 1000,
         state: states[this.getRandomNumber(0, 2)],
         user: users[this.getRandomNumber(0, 1)],
