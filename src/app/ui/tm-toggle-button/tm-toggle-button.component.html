@@ -1,2 +1,9 @@
-<button (click)="onToggle()">{{ checked ? 'OK' : 'NOT OK' }}</button>
+<button [ngClass]="{
+          'on': checked,
+          'off': !checked
+        }"
+        (click)="onToggle()"
+>
+  {{ checked ? 'ВКЛ' : 'ОТКЛ' }}
+</button>
 

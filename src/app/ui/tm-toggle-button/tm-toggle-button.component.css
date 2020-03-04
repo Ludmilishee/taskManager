@@ -1,0 +1,21 @@
+button {
+  border: none;
+  padding: 3px 10px;
+  outline: none;
+}
+
+button.on {
+  background: #cee1ff;
+}
+
+button.on:before {
+  content: '\2714';
+}
+
+button.off {
+  background: #e8e8e8;
+}
+
+button.off:before {
+  content: '\2716';
+}

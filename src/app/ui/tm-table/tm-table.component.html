@@ -4,9 +4,9 @@
       {{ col.header }}
       <span class="filter"
             [ngClass]="{
-          'arrow-up': selectedSortMode.field === col.field && selectedSortMode.value === sortMode.Asc,
-          'arrow-down': selectedSortMode.field === col.field && selectedSortMode.value === sortMode.Desc
-        }"
+              'arrow-up': selectedSortMode.field === col.field && selectedSortMode.value === sortMode.Asc,
+              'arrow-down': selectedSortMode.field === col.field && selectedSortMode.value === sortMode.Desc
+            }"
       ></span>
       <span *ngIf="!isLast"
             class="resizer"

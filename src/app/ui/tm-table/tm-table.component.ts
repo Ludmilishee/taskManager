@@ -1,8 +1,8 @@
-import { Component, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { TableColumnHeader, sortMode } from '../../models/tableData.model';
 
 @Component({
-  selector: 'app-tm-table',
+  selector: 'tm-table',
   templateUrl: './tm-table.component.html',
   styleUrls: ['./tm-table.component.css']
 })
@@ -18,6 +18,7 @@ export class TmTableComponent implements OnInit {
   selectedSortMode: { value: number, field: string } = { value: 0, field: '' };
   sortMode = sortMode;
 
+  private readonly COL_MIN_WIDTH = 50;
   private tableData;
   private initialPos: number;
 
@@ -31,17 +32,27 @@ export class TmTableComponent implements OnInit {
   }
 
   onResizeEnd(event) {
+    const th = event.target.closest('th');
+
     const delta = event.pageX - this.initialPos;
-    let currentElWidth = event.target.closest('th').offsetWidth + delta;
-    let nextElWidth = event.target.closest('th').nextSibling.offsetWidth - delta;
-    const maxAvailableWidth = currentElWidth + nextElWidth - 100;
+    let currentElWidth = th.offsetWidth + delta;
+    let nextElWidth = th.nextSibling.offsetWidth - delta;
+    const maxAvailableWidth = currentElWidth + nextElWidth - this.COL_MIN_WIDTH;
 
     if (currentElWidth > maxAvailableWidth) {
       currentElWidth = maxAvailableWidth;
-      nextElWidth = 100;
+      nextElWidth = this.COL_MIN_WIDTH;
     }
-    this.renderer.setStyle(event.target.parentElement, 'width', `${currentElWidth}px`);
-    this.renderer.setStyle(event.target.parentElement.nextSibling, 'width', `${nextElWidth}px`);
+    if (currentElWidth < this.COL_MIN_WIDTH) {
+      currentElWidth = this.COL_MIN_WIDTH;
+      nextElWidth = maxAvailableWidth;
+    }
+    console.log('delta: ' + delta);
+    console.log('cur: ' + currentElWidth);
+    console.log('next: ' + nextElWidth);
+
+    this.renderer.setStyle(th, 'width', `${currentElWidth}px`);
+    this.renderer.setStyle(th.nextSibling, 'width', `${nextElWidth}px`);
   }
 
   onFilter(column: TableColumnHeader) {

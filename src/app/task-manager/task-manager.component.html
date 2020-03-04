@@ -1,5 +1,10 @@
-<h3>List of tasks</h3>
-Автообновление <app-tm-toggle-button [checked]="true" (changeState)="switchAutoUpdate($event)"></app-tm-toggle-button>
-<app-tm-table [data]="tasksData"
-              [columns]="colHeaders"
-></app-tm-table>
+<h3>Диспетчер задач</h3>
+<div class="control-panel">
+  Автообновление
+  <tm-toggle-button [checked]="true"
+                    (changeState)="switchAutoUpdate($event)"
+  ></tm-toggle-button>
+</div>
+<tm-table [data]="tasksData"
+          [columns]="colHeaders"
+></tm-table>

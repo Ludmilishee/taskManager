@@ -1,13 +1,7 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter
-} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-tm-toggle-button',
+  selector: 'tm-toggle-button',
   templateUrl: './tm-toggle-button.component.html',
   styleUrls: ['./tm-toggle-button.component.css']
 })

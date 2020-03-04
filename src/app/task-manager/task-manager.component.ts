@@ -3,10 +3,10 @@ import { TasksService } from '../services/tasks.service';
 import { Task } from '../models/task.model';
 import { TableColumnHeader } from '../models/tableData.model';
 import { ReplaySubject } from 'rxjs';
-import { delay, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-task-manager',
+  selector: 'tm-task-manager',
   templateUrl: './task-manager.component.html',
   styleUrls: ['./task-manager.component.css']
 })
@@ -20,10 +20,12 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
   tasksData: Task[];
   colHeaders: TableColumnHeader[] = [
     { field: 'name', header: 'Имя' },
-    { field: 'cpu', header: 'ЦП' },
-    { field: 'memory', header: 'Паямть' },
-    { field: 'disk', header: 'Диск' },
-    { field: 'network', header: 'Сеть' }
+    { field: 'id', header: 'ИД процесса' },
+    { field: 'state', header: 'Состояние' },
+    { field: 'user', header: 'Пользователь' },
+    { field: 'cpu', header: 'ЦП, %' },
+    { field: 'memory', header: 'ОЗУ, %' },
+    { field: 'disk', header: 'Память, Кб' }
   ];
 
   private switchAutoUpdate(checked = true) {
