@@ -9,7 +9,7 @@ import { TableColumnHeader, sortMode } from '../../models/tableData.model';
 })
 export class TableComponent implements OnInit {
 
-  @Input() columns: TableComponent[];
+  @Input() columns: TableColumnHeader[];
   @Input()
   set data(data) {
     this.tableData = data;

@@ -29,7 +29,7 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
     { field: 'disk', header: 'Память, Кб' }
   ];
 
-  private switchAutoUpdate(checked = true) {
+  switchAutoUpdate(checked = true) {
     if (checked) {
       this.taskDataSubscription = this.tasksService
         .getTaskListData()
